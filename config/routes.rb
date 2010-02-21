@@ -1,11 +1,12 @@
 Sharktank::Application.routes.draw do
 	
 	resources :problems
+
+	match '/about', :to => 'pages#about'
+	match '/contact', :to => 'pages#contact'
 	
-  get "pages/home"
+	root :to => 'pages#home'
+	
 
-  get "pages/about"
-
-  get "pages/contact"
-  
+	
 end
