@@ -1,9 +1,6 @@
 Sharktank::Application.routes.draw do
-  get "problems/index"
 	
-  get "problems/show"
+	resources :problems
 	
-  get "problems/new"
-  
   
 end

@@ -10,6 +10,8 @@
             <string>spec\controllers\problems_controller_spec.rb</string>
             <key>problems</key>
             <string>spec\models\problem_spec.rb</string>
+            <key>problems_con</key>
+            <string>app\controllers\problems_controller.rb</string>
         </dict>
     </dict>
 </plist>

@@ -20,5 +20,10 @@ describe Problem do
 		no_a_prob.should_not be_valid
 	end
 	
+	it "should reject duplicate questions" do
+		Problem.create!(@attr)
+		dup_prob = Problem.new(@attr)
+		dup_prob.should_not be_valid
+	end
 	
 end
