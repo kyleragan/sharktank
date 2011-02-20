@@ -1,6 +1,6 @@
 class ProblemsController < ApplicationController
   def index
-  	
+  	@probs = Problem.all
   end
 
   def show
@@ -8,7 +8,7 @@ class ProblemsController < ApplicationController
   end
 
   def new
-  	@prob = Problem.new
+  	@prob = Problem.new_random_problem
   end
 	
 	def create
