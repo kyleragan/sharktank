@@ -1,4 +1,10 @@
 Sharktank::Application.routes.draw do
+  get "problems/index"
+
+  get "problems/show"
+
+  get "problems/new"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
