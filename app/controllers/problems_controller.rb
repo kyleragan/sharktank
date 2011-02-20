@@ -8,6 +8,17 @@ class ProblemsController < ApplicationController
   end
 
   def new
+  	@prob = Problem.new
   end
-
+	
+	def create
+		@prob = Problem.new(params[:problem])
+		if @prob.save!
+			redirect_to @prob
+		else
+			render new
+		end
+	end
+	
+  
 end
