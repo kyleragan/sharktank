@@ -6,6 +6,10 @@
         <dict>
             <key>gemfil</key>
             <string>Gemfile</string>
+            <key>problem</key>
+            <string>spec\controllers\problems_controller_spec.rb</string>
+            <key>problems</key>
+            <string>spec\models\problem_spec.rb</string>
         </dict>
     </dict>
 </plist>
