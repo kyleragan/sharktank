@@ -8,7 +8,7 @@ class SimpleAlgProblem < Problem
 		b = 1+rand(15)
 		c = a*x+b
 		p = Problem.new
-		p.question = "#{a}x + #{b} = #{c}.  Solve for x."
+		p.question = "Solve for x: \\[#{a}x + #{b} = #{c}\\]"
 		p.answer = x.to_s
 		return p
 	end
