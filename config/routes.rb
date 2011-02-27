@@ -1,11 +1,7 @@
 Sharktank::Application.routes.draw do
 	
 	
-	resources :problems do
-		collection do
-			get 'newalgebra'
-		end
-	end
+	resources :problems, :only => [:index, :show, :create]
 	
 	resources :simple_alg_problems, :controller => :problems
 	
@@ -19,3 +15,4 @@ Sharktank::Application.routes.draw do
 
 	
 end
+
