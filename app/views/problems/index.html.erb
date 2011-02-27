@@ -1,12 +1,6 @@
 <h1 id="problems">Problems</h1>
 
-<% @probs.each do |p| %>
-  <br>
-  <%= p.tex_inline_question %>
-  
-  <%= link_to "  Answer", p %>
-
-<% end %>
+<%= render :partial => "problem", :collection => @probs %>
 
 <br>
 <%= form_for(@newprob) do |p| %>
