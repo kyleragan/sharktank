@@ -6,6 +6,7 @@ class ProblemsController < ApplicationController
 
   def show
   	@prob = Problem.find(params[:id])
+  	
   end
 	
 #  def new
@@ -22,6 +23,7 @@ class ProblemsController < ApplicationController
 	def create
 		#@prob = Problem.new(params[:problem])
 		@prob = Problem.new_random_problem
+		@prob = SimpleAlgProblem.new_random_problem if params[:simple_algebra_problem]
 		if @prob.save
 		  redirect_to index
 #			redirect_to @prob

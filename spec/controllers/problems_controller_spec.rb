@@ -9,14 +9,23 @@ describe ProblemsController do
       response.should be_success
     end
     it "should set @probs" 
-    #TODO: it "should set @probs"
     
   end
   
   describe "GET 'show'" do
     
     before(:each) do
-      @prob = Factory(:problem)
+      @problem = Factory(:problem)
+    end
+    
+    it "should be successful" do
+      get :show, :id => @problem
+      response.should be_success
+    end
+    
+    it "should find the right user" do
+      get :show, :id => @problem
+      assigns(:prob).should == @problem
     end
     
   end

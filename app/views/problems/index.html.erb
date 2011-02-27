@@ -1,11 +1,19 @@
 <h1 id="problems">Problems</h1>
 
-<%= render @probs %>
+<% @probs.each do |p| %>
+  <br>
+  <%= p.tex_inline_question %>
+  
+  <%= link_to "  Answer", p %>
+
+<% end %>
 
 <br>
 <%= form_for(@newprob) do |p| %>
   <div class="actions">
     <%= p.submit "New Problem" %>
+    <%= p.submit "New Algebra Problem", :name => "simple_alg_problem" %>
   </div>
 <% end %>
+
 

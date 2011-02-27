@@ -6,6 +6,8 @@ Sharktank::Application.routes.draw do
 		end
 	end
 	
+	resources :simple_alg_problems
+	
 
 
 	match '/about', :to => 'pages#about'
