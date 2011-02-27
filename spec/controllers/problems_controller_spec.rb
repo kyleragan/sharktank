@@ -13,6 +13,14 @@ describe ProblemsController do
     
   end
   
+  describe "GET 'show'" do
+    
+    before(:each) do
+      @prob = Factory(:problem)
+    end
+    
+  end
+  
   describe "POST 'create'" do
     
     it "should create a new problem"
