@@ -7,14 +7,28 @@ class Problem < ActiveRecord::Base
 	
 	validates :answer,		:presence  => true
 	
+	def tex_question
+	  return "$$"+question+"$$"
+	end
+	
+	def tex_inline_question
+	  return "\\("+question+"\\)"
+  end
+ 
 	
 	private
 	
 	def self.new_random_problem
 		p = Problem.new
-		p.question = "1+1=?"
-		p.answer = "2"
+		a = rand(20)
+		b = rand(20)
+		c = a+b
+		p.question = "#{a}+#{b}=?"
+		p.answer = c.to_s
 		return p
 	end
 	
+
+	
 end
+

@@ -1,3 +1,11 @@
 <h1 id="problems">Problems</h1>
 
 <%= render @probs %>
+
+<br>
+<%= form_for(@newprob) do |p| %>
+  <div class="actions">
+    <%= p.submit "New Problem" %>
+  </div>
+<% end %>
+

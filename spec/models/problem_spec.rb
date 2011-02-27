@@ -26,4 +26,8 @@ describe Problem do
 		dup_prob.should_not be_valid
 	end
 	
+	#TODO: add a problem uniquness index to the db.
+	
+	
 end
+

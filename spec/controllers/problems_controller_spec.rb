@@ -8,20 +8,19 @@ describe ProblemsController do
       get 'index'
       response.should be_success
     end
-  end
-	
-  describe "GET 'new'" do
-    it "should be successful" do
-      get 'new'
-      response.should be_success
-    end
+    it "should set @probs" 
+    #TODO: it "should set @probs"
     
-    it "should be the right page" do
-    	get 'new'
-    	response.should have_selector("h1", :content => "New Problem"  )
-    end
+  end
+  
+  describe "POST 'create'" do
+    
+    it "should create a new problem"
+    
+    it "should redirect to the show page"
     
   end
 	
 
 end
+
