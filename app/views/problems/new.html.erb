@@ -1,0 +1,23 @@
+<h1>Create a new Problem</h1>
+
+<%= @newprob.errors.full_messages %>
+
+<br>
+<%= form_for(@newprob) do |p| %>
+  <%= render :partial => 'shared/error_messages', :collection => @newprob, :as => :x %>
+  <div class="field">
+    <%= p.label :question %><br />
+    <%= p.text_field :question %>
+  </div>
+  <div class="field">
+    <%= p.label :answer %><br />
+    <%= p.text_field :answer %>
+  </div>
+  <%= p.hidden_field :type %>
+  <div class="actions">
+    <%= p.submit "Save" %>
+    <%= p.submit "Problem", :name => "type" %>
+    <%= p.submit "SimpleAlgProblem", :name => "type" %>
+  </div>
+<% end %>
+

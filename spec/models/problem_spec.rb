@@ -15,6 +15,13 @@ describe Problem do
 		no_q_prob.should_not be_valid
 	end
 	
+	it "should not save without a question" do
+	  no_q_prob = Problem.new(@attr.merge(:question => ""))
+	  lambda do
+	    no_q_prob.save
+	  end.should_not change(Problem, :count)
+	end
+	
 	it "should require an answer" do
 		no_a_prob = Problem.new(@attr.merge(:answer => ""))
 		no_a_prob.should_not be_valid

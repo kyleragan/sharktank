@@ -8,7 +8,10 @@ describe ProblemsController do
       get 'index'
       response.should be_success
     end
-    it "should set @probs" 
+    it "should have the right title" do
+      get :index
+      response.should have_selector("title", :content => "Problem List")
+    end
     
   end
   
@@ -30,14 +33,54 @@ describe ProblemsController do
     
   end
   
+  describe "GET 'new'" do
+    
+    it "should be successful" do
+      get :new
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :new
+      response.should have_selector("title", :content => "New Problem")
+    end
+    
+  end
+  
   describe "POST 'create'" do
     
-    it "should create a new problem"
-    
-    it "should redirect to the show page"
+    describe "with a blank problem" do
+      
+      before(:each) do
+        @attr = { :question => "", :answer => "" }
+      end
+      
+      it "should not create a problem" 
+      
+      it "should have the right title"
+      
+      it "should render the new page"
+      
+      it "should have a flash"
+      
+    end
     
   end
 	
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

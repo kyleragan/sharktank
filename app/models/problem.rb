@@ -14,18 +14,32 @@ class Problem < ActiveRecord::Base
 	def tex_inline_question
 	  return "\\("+question+"\\)"
   end
- 
-	
-	private
-	
-	def self.new_random_problem
-		p = Problem.new
+  
+	def self.factory(t, params)
+	  t ||= 'Problem'
+	  class_name = t
+	  if defined? class_name.constantize
+	    return class_name.constantize.new(params)
+    else
+      Problem.new(params)
+    end
+	end
+  
+  def problem_type=(value)
+    self[:type] = value
+  end
+  
+  def problem_type
+    return self[:type]
+  end
+  
+	def generate
 		a = rand(20)
 		b = rand(20)
 		c = a+b
-		p.question = "#{a}+#{b}=?"
-		p.answer = c.to_s
-		return p
+		self.question = "#{a}+#{b}=?"
+		self.answer = c.to_s
+		return self
 	end
 	
 

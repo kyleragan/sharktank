@@ -1,8 +1,10 @@
 class ProblemsController < ApplicationController
   
+
+  
   def index
   	@probs = Problem.all
-  	@newprob = Problem.new
+  	@title = "Problem List"
   end
 
   def show
@@ -10,18 +12,38 @@ class ProblemsController < ApplicationController
   	
   end
 	
-  
+	def new
+	  type = params[:type]
+	  type ||= 'Problem'
+	  @newprob = Problem.factory(type,{})
+	  @newprob.generate
+	  @title = "New Problem"
+	end
+	
+	
+	  
 	def create
-		@prob = Problem.new_random_problem
-		if params[:simple_alg_problem]
-		  @prob = SimpleAlgProblem.new_random_problem
+    type = params[:type]
+	  type ||= 'Problem'
+	  type ||= params[type.underscore.to_sym][:type]
+	  @newprob = Problem.factory(type,params[type.underscore.to_sym])
+	  @newprob.question = params[type.underscore.to_sym][:question]
+	  @newprob.answer = params[type.underscore.to_sym][:answer]
+    if params[:type]
+      @newprob.generate
+      @title = "New Problem"
+      render :new and return
     end
-		if @prob.save
-		  redirect_to index
-#			redirect_to @prob
+    @probs = Problem.all
+    
+		if @newprob.save
+		  @probs << @newprob
+		  flash[:success] = "Problem Created."
+		  render :index
 		else
 		  #TODO: handle failed problem create
-			render new
+		  #flash[:error] = "Error"
+			render :new
 		end
 	end
 	
