@@ -13,7 +13,7 @@ class ProblemsController < ApplicationController
   end
 	
 	def new
-	  type = params[:type]
+	  type = params[:generate]
 	  type ||= 'Problem'
 	  @newprob = Problem.factory(type,{})
 	  @newprob.generate
@@ -22,29 +22,29 @@ class ProblemsController < ApplicationController
 	
 	
 	def create
-	  if params[:type]
+	  if params[:generate]
 	    #generate and reload :new
-	    type = params[:type]
-	    @newprob = Problem.factory(type,params[type.underscore.to_sym])
+	    type = params[:generate]
+	    @newprob = Problem.factory(type,params[:problem])
 	    @newprob.generate
 	    @title = "New Problem"
 	    render :new and return
     else
       #attempt to save
-      type = params[type.underscore.to_sym][:type] if params[type.underscore.to_sym]
-      @newprob = Problem.factory(type,params[type.underscore.to_sym])
+      type = params[:type]
+      @newprob = Problem.factory(type,params[:problem])
       @probs = Problem.all
       if @newprob.save
         @probs << @newprob
         flash[:success] = "Problem Created."
-		    render :index
+		    render :action => :index
       else
         render :new
       end
 	  end
 	end
 	
-
+  
 	
 	#TODO: edit, update, destroy
 	#NOTE: probaly no edit/update controllers

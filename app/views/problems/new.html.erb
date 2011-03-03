@@ -1,6 +1,6 @@
 <h1>Create a new Problem</h1>
 
-<%= @newprob.errors.full_messages %>
+<%= render :partial => 'shared/error_messages', :locals => { :x => @newprob } %>
 
 <br>
 <%= form_for(@newprob) do |p| %>
@@ -13,11 +13,11 @@
     <%= p.label :answer %><br />
     <%= p.text_field :answer %>
   </div>
-  <%= p.hidden_field :type %>
+  <%= hidden_field_tag 'type', @newprob.problem_type %>
   <div class="actions">
     <%= p.submit "Save" %>
-    <%= p.submit "Problem", :name => "type" %>
-    <%= p.submit "SimpleAlgProblem", :name => "type" %>
+    <%= p.submit "Problem", :name => "generate" %>
+    <%= p.submit "SimpleAlgProblem", :name => "generate" %>
   </div>
 <% end %>
 
