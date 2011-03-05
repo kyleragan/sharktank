@@ -9,10 +9,6 @@
     <%= p.label :question %><br />
     <%= p.text_field :question %>
   </div>
-  <div class="field">
-    <%= p.label :answer %><br />
-    <%= p.text_field :answer %>
-  </div>
   <%= hidden_field_tag 'type', @newprob.problem_type %>
   <div class="actions">
     <%= p.submit "Save" %>

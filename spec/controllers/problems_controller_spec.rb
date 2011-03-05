@@ -52,7 +52,7 @@ describe ProblemsController do
     describe "with a blank problem" do
       
       before(:each) do
-        @attr = { :question => "", :answer => "" }
+        @attr = { :question => "" }
       end
       
       it "should not create a problem" do
@@ -81,7 +81,7 @@ describe ProblemsController do
   describe "success" do
     
     before(:each) do
-      @attr = { :question => "1+1=?", :answer => "2" }
+      @attr = { :question => "1+1=?" }
     end
     
     it "should create a problem" do

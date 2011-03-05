@@ -1,11 +1,9 @@
 class Problem < ActiveRecord::Base
 	
-	attr_accessible :question, :answer
+	attr_accessible :question
 	
 	validates :question,	:presence => true,
 												:uniqueness => true 
-	
-	validates :answer,		:presence  => true
 	
 	def tex_question
 	  return "$$"+question+"$$"
@@ -47,7 +45,6 @@ class Problem < ActiveRecord::Base
 		b = rand(20)
 		c = a+b
 		self.question = "#{a}+#{b}=?"
-		self.answer = c.to_s
 		self.type = "Problem"
 		return self
 	end

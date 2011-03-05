@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Problem do
 	
 	before(:each) do
-		@attr = { :question => "1+1=?", :answer => "42", } 
+		@attr = { :question => "1+1=?" } 
 	end
 	
 	it "should create a new problem given valid attributes" do
@@ -22,10 +22,6 @@ describe Problem do
 	  end.should_not change(Problem, :count)
 	end
 	
-	it "should require an answer" do
-		no_a_prob = Problem.new(@attr.merge(:answer => ""))
-		no_a_prob.should_not be_valid
-	end
 	
 	it "should reject duplicate questions" do
 		Problem.create!(@attr)
@@ -67,4 +63,15 @@ describe Problem do
 	end
 	
 end
+
+
+
+#TODO: write tests for generate
+#TODO: write tests for changing problem type => changing class
+
+
+
+
+
+
 
