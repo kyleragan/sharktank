@@ -45,9 +45,12 @@ class ProblemsController < ApplicationController
 	  end
 	end
 	
-  
+  def destroy
+    Problem.find(params[:id]).destroy
+    flash[:success] = "Problem Deleted."
+    redirect_to problems_path
+  end
 	
-	#TODO: destroy
   
 end
 

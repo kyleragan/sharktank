@@ -1,7 +1,7 @@
 Sharktank::Application.routes.draw do
 	
 	
-	resources :problems, :only => [:index, :show, :create, :new]
+	resources :problems, :only => [:index, :show, :create, :new, :destroy]
 	
 	#resources :simple_alg_problems, :controller => :problems
 	

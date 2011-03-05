@@ -1,6 +1,7 @@
   <div name="singlelineproblems">
   <%= problem.tex_inline_question %>
   <%= link_to "  Answer", problem_path(problem) %>
+  |  <%= link_to "delete", problem, :method => :delete, :confirm => "You sure?", :title => "Delete" %>
   <br>
   <end>
 

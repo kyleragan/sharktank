@@ -104,6 +104,26 @@ describe ProblemsController do
     
   end
 	
+	describe "DELETE 'destroy'" do
+	  
+	  before(:each) do
+	    @prob = Factory(:problem)
+	  end
+	  
+	  it "should destroy the problem" do
+	    lambda do
+	      delete :destroy, :id => @prob
+	    end.should change(Problem, :count).by(-1)
+	  end
+	  
+	  it "should redirect to the problem list" do
+	    delete :destroy, :id => @prob
+	    response.should redirect_to(problems_path)
+	  end
+	  
+	end
+	
+	
 end
 
 
