@@ -55,26 +55,62 @@ describe ProblemsController do
         @attr = { :question => "", :answer => "" }
       end
       
-      it "should not create a problem" 
+      it "should not create a problem" do
+        lambda do
+          post :create, :problem => @attr
+        end.should_not change(Problem, :count)
+      end
       
-      it "should have the right title"
+      it "should have the right title" do
+        post :create, :problem => @attr
+        response.should have_selector("title", :content => "New Problem")
+      end
       
-      it "should render the new page"
+      it "should render the new page" do
+        post :create, :problem => @attr
+        response.should render_template('new')
+      end
       
-      it "should have a flash"
+      it "should have an error explaination" do
+        post :create, :problem => @attr
+        response.should have_selector("div#error_explanation")
+      end
       
+    end
+  
+  describe "success" do
+    
+    before(:each) do
+      @attr = { :question => "1+1=?", :answer => "2" }
+    end
+    
+    it "should create a problem" do
+      lambda do
+        post :create, :problem => @attr
+      end.should change(Problem, :count).by(1)
+    end
+    
+    it "should render the problem index" do
+      post :create, :problem => @attr
+      response.should render_template('index')
+    end
+    
+    it "should have a success message" do
+      post :create, :problem => @attr
+      flash[:success].should =~ /problem created/i
     end
     
   end
+    
+  end
 	
-
 end
 
 
 
+#TODO: write tests for the 'type' param
 
-
-
+#TODO: write RSpec integration tests
 
 
 

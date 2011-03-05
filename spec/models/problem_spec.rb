@@ -33,8 +33,38 @@ describe Problem do
 		dup_prob.should_not be_valid
 	end
 	
-	#TODO: add a problem uniquness index to the db.
+	it "should not have a problem_type" do
+	  p = Problem.create!(@attr)
+	  p.problem_type.should be_nil
+	end
 	
+	it "should have a model name 'Problem'" do
+	  Problem.model_name.should == "Problem"
+	end
+	
+	describe "factory method with nil type" do
+	  before(:each) do
+	    @p = Problem.factory(nil, @attr)
+	  end
+	  it "should create a 'Problem' class" do
+	    @p.class.to_s.should == "Problem"
+	  end
+	  it "should have the right type" do
+	    @p.problem_type.should be_nil
+	  end
+	end
+
+	describe "factory method with 'Problem' type" do
+	  before(:each) do
+	    @p = Problem.factory("Problem", @attr)
+	  end
+	  it "should create a 'Problem' class" do
+	    @p.class.to_s.should == "Problem"
+	  end
+	  it "should have the right type" do
+	    @p.problem_type.should be_nil
+	  end
+	end
 	
 end
 

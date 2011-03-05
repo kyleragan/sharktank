@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110221014612) do
+ActiveRecord::Schema.define(:version => 20110305000737) do
 
   create_table "problems", :force => true do |t|
     t.string   "question"
@@ -19,5 +19,7 @@ ActiveRecord::Schema.define(:version => 20110221014612) do
     t.datetime "updated_at"
     t.string   "type"
   end
+
+  add_index "problems", ["question"], :name => "index_problems_on_question", :unique => true
 
 end

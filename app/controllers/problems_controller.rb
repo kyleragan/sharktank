@@ -39,6 +39,7 @@ class ProblemsController < ApplicationController
         flash[:success] = "Problem Created."
 		    render :action => :index
       else
+        @title = "New Problem"
         render :new
       end
 	  end
@@ -46,8 +47,7 @@ class ProblemsController < ApplicationController
 	
   
 	
-	#TODO: edit, update, destroy
-	#NOTE: probaly no edit/update controllers
+	#TODO: destroy
   
 end
 
