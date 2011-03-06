@@ -15,6 +15,11 @@ describe Problem do
 		no_q_prob.should_not be_valid
 	end
 	
+	it "should require a nonblank question" do
+	  prob = Problem.new(@attr.merge(:question => "  "))
+	  prob.should_not be_valid
+	end
+	
 	it "should not save without a question" do
 	  no_q_prob = Problem.new(@attr.merge(:question => ""))
 	  lambda do
@@ -60,6 +65,32 @@ describe Problem do
 	  it "should have the right type" do
 	    @p.problem_type.should be_nil
 	  end
+	end
+	
+	describe "answer associations" do
+	  
+	  before(:each) do
+	    @prob = Problem.factory('Problem', @attr).generate
+	    @prob.save!
+	    @ans1 = Factory(:answer, :problem => @prob)
+	    @ans2 = Factory(:answer, :problem => @prob, :content => "3", :correct => false)
+	  end
+	  
+	  it "should have an answers attribute" do
+	    @prob.should respond_to(:answers)
+	  end
+	  
+	  it "should have the right answers" do
+	    @prob.answers.should == [@ans1, @ans2]
+	  end
+	  
+	  it "should destroy associated answers" do
+	    @prob.destroy
+	    [@ans1, @ans2].each do |ans|
+	      Answer.find_by_id(ans.id).should be_nil
+	    end
+	  end
+	  
 	end
 	
 end

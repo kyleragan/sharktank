@@ -10,7 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110305011645) do
+ActiveRecord::Schema.define(:version => 20110306035304) do
+
+  create_table "answers", :force => true do |t|
+    t.string   "content"
+    t.integer  "problem_id"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["problem_id"], :name => "index_answers_on_problem_id"
 
   create_table "problems", :force => true do |t|
     t.string   "question"

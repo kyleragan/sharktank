@@ -4,3 +4,11 @@ Factory.define :problem do |prob|
 	
 end
 
+Factory.define :answer do |ans|
+  ans.content           "2"
+  ans.correct           true
+  ans.association       :problem
+end
+
+
+#IMPROVE: change the factories to use 'generate'

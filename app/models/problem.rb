@@ -2,8 +2,13 @@ class Problem < ActiveRecord::Base
 	
 	attr_accessible :question
 	
+	has_many :answers, :dependent => :destroy
+	
 	validates :question,	:presence => true,
 												:uniqueness => true 
+	#validates_associated :answers
+	#TODO: validates_associated
+	
 	
 	def tex_question
 	  return "$$"+question+"$$"
