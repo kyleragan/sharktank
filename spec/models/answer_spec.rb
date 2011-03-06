@@ -25,9 +25,31 @@ describe Answer do
       @prob.answers.build(@attr.merge(:content => "a"*51)).should_not be_valid
     end
     
-    it "should be unique on content/problem"
+    it "should be unique on content/problem" do
+      @prob.answers.create!(@attr)
+      dup_ans = @prob.answers.build(@attr.merge( :correct => false ))
+      dup_ans.should_not be_valid
+    end
     
-    it "should be unique on true/problem"
+    it "should not create duplicate answer content on the same problem" do
+      @prob.answers.create(@attr)
+      lambda do
+        @prob.answers.create(@attr.merge( :correct => false ))
+      end.should_not change(Answer, :count)
+    end
+    
+    it "should be unique on true/problem" do
+      @prob.answers.create!(@attr)
+      dup_ans = @prob.answers.build(@attr.merge( :content => "a different answer" ))
+      dup_ans.should_not be_valid
+    end
+    
+    it "should not create another correct answer on the same problem" do
+      @prob.answers.create(@attr)
+      lambda do
+        @prob.answers.create(@attr.merge( :content => "a different answer" ))
+      end.should_not change(Answer, :count)
+    end
     
   end
   
