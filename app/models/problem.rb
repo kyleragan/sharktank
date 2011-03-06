@@ -53,3 +53,21 @@ class Problem < ActiveRecord::Base
 	
 end
 
+
+
+
+
+
+
+
+#TODO: add a 'ProblemTypeCustom' subclass, text box changes change type to problemtypecustom
+
+
+
+
+
+
+
+
+
+

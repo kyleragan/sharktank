@@ -54,3 +54,20 @@ class ProblemsController < ApplicationController
   
 end
 
+
+
+
+
+
+
+
+#IMPROVE: can i change the text of my generate buttons?
+
+
+
+
+
+
+
+
+
