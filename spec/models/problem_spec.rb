@@ -91,6 +91,8 @@ describe Problem do
 	    end
 	  end
 	  
+	  it "should require an answer"
+	  
 	end
 	
 end

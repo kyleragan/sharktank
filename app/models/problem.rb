@@ -3,11 +3,19 @@ class Problem < ActiveRecord::Base
 	attr_accessible :question
 	
 	has_many :answers, :dependent => :destroy
+	accepts_nested_attributes_for   :answers, :allow_destroy => true
 	
 	validates :question,	:presence => true,
 												:uniqueness => true 
+  #validate :at_least_one_answer
 	#validates_associated :answers
 	#TODO: validates_associated
+	
+	def at_least_one_answer
+	  if self.answers.size < 1 || self.answers.all?{|ans| ans.marked_for_destruction?}
+	    errors.add_to_base("A Problem must have at least one answer")
+    end
+	end
 	
 	
 	def tex_question
@@ -51,6 +59,7 @@ class Problem < ActiveRecord::Base
 		c = a+b
 		self.question = "#{a}+#{b}=?"
 		self.type = "Problem"
+		#self.answers << Answer.new(content: c.to_s, correct: true)
 		return self
 	end
 	
