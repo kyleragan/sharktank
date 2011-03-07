@@ -19,7 +19,6 @@ class Problem < ActiveRecord::Base
     end
 	end
 	
-  #IMPROVE: not very useful yet, since rails only loads files when they are needed.
   @types_of_problems = [] 
 	
   class << self
@@ -92,6 +91,7 @@ class Problem < ActiveRecord::Base
   end
 	
 	load_all_problem_types
+	#TODO: test autoload
 	
 end
 
@@ -101,8 +101,6 @@ end
 
 
 #TODO: add a 'ProblemTypeCustom' subclass, text box changes change type to problemtypecustom
-#TODO: load everything in a '/type' directory to autoload all subclass definitions
-
 
 
 

@@ -109,7 +109,7 @@ end
 
 
 #TODO: write tests for generate
-#TODO: write tests for changing problem type => changing class
+#TODO: write tests? for changing problem type => changing class
 
 
 
