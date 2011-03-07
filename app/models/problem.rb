@@ -11,7 +11,7 @@ class Problem < ActiveRecord::Base
 												:uniqueness => true 
   validate :at_least_one_answer
 	#validates_associated :answers
-	#TODO: validates_associated
+	#TODO: validates_associated. first test if it's needed. create an invalid answer with a problem.
 	
 	def at_least_one_answer
 	  if self.answers.length < 1 || self.answers.all?{|ans| ans.marked_for_destruction?}
@@ -19,33 +19,37 @@ class Problem < ActiveRecord::Base
     end
 	end
 	
-	
-	def tex_question
-	  return "$$"+question+"$$"
-	end
-	
-	def tex_inline_question
-	  return "\\("+question+"\\)"
-  end
+
+	@types_of_problems = []
   
-  def self.inherited(child) #make all children have model_name = 'Problem'
-    child.instance_eval do
-      def model_name
-        Problem.model_name
+  class << self
+    
+    attr_reader :types_of_problems
+    
+    def inherited(child) #make all children have model_name = 'Problem'
+      Problem.types_of_problems << child
+      child.instance_eval do
+        def model_name
+          Problem.model_name
+        end
       end
+      super
     end
-    super
-  end
-  
-	def self.factory(t, params)
-	  t ||= 'Problem'
-	  class_name = t
-	  if defined? class_name.constantize
-	    return class_name.constantize.new(params)
-    else
-      Problem.new(params)
-    end
+    
+  	def factory(t, params)
+  	  t ||= 'Problem'
+  	  class_name = t
+  	  if defined? class_name.constantize
+  	    return class_name.constantize.new(params)
+      else
+        Problem.new(params)
+      end
+  	end
+  	
 	end
+	
+	
+	#IMPROVE: add generate to factory method?
   
   def problem_type=(value) #access the problemtype with these methods rather than model_name
     self[:type] = value
@@ -65,11 +69,17 @@ class Problem < ActiveRecord::Base
 		return self
 	end
 	
+	
+	def tex_question
+	  return "$$"+question+"$$"
+	end
+	
+	def tex_inline_question
+	  return "\\("+question+"\\)"
+  end
 
 	
 end
-
-
 
 
 
