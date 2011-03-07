@@ -3,7 +3,7 @@ require 'spec_helper'
 describe SimpleAlgProblem do
 	
 	before(:each) do
-		@attr = { :question => "12x+10=178" } 
+		@attr = { :question => "12x+10=178", :answers_attributes => [{ :content => "14", :correct => true }]  } 
 	end
 	
 	it "should create a new problem given valid attributes" do

@@ -3,7 +3,8 @@ require 'spec_helper'
 describe Problem do
 	
 	before(:each) do
-		@attr = { :question => "1+1=?" } 
+		@attr = { :question => "1+1=?", :answers_attributes => [{ :content => "2", :correct => true }] } 
+
 	end
 	
 	it "should create a new problem given valid attributes" do
@@ -27,6 +28,11 @@ describe Problem do
 	  end.should_not change(Problem, :count)
 	end
 	
+	it "should require at least one answer" do
+	  @attr.delete(:answers_attributes)
+	  p = Problem.new(@attr)
+	  p.should_not be_valid
+	end
 	
 	it "should reject duplicate questions" do
 		Problem.create!(@attr)
@@ -70,14 +76,18 @@ describe Problem do
 	describe "answer associations" do
 	  
 	  before(:each) do
-	    @prob = Problem.factory('Problem', @attr).generate
+	    @prob = Problem.factory('Problem', @attr)#.generate
 	    @prob.save!
-	    @ans1 = Factory(:answer, :problem => @prob)
-	    @ans2 = Factory(:answer, :problem => @prob, :content => "3", :correct => false)
+	    @ans1 = @prob.answers.first
+	    @ans2 = @prob.answers.build(:content => "3", :correct => false)
 	  end
 	  
 	  it "should have an answers attribute" do
 	    @prob.should respond_to(:answers)
+	  end
+	  
+	  it "should have two answers" do
+	    @prob.answers.length.should == 2
 	  end
 	  
 	  it "should have the right answers" do
@@ -91,7 +101,6 @@ describe Problem do
 	    end
 	  end
 	  
-	  it "should require an answer"
 	  
 	end
 	
