@@ -1,8 +1,5 @@
 class SimpleAlgProblem < Problem
 
-	
-
-	
 	def generate
 		a = 1+rand(15)
 		x = rand(15)

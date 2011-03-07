@@ -19,9 +19,9 @@ class Problem < ActiveRecord::Base
     end
 	end
 	
-
-	@types_of_problems = []
-  
+  #IMPROVE: not very useful yet, since rails only loads files when they are needed.
+  @types_of_problems = [] 
+	
   class << self
     
     attr_reader :types_of_problems
@@ -77,7 +77,21 @@ class Problem < ActiveRecord::Base
 	def tex_inline_question
 	  return "\\("+question+"\\)"
   end
-
+  
+  
+  def self.load_all_problem_types
+    type_dir = Dir.new("./app/models/problem_types")
+    type_dir.each do |file_name| 
+      if file_name =~ /.*\.rb/
+        require "problem_types/"+file_name
+        name = file_name.sub(".rb","").camelize.constantize
+        puts name.to_s+" loaded"
+        raise "Undefined: #{name}" unless defined?(name)
+      end
+    end
+  end
+	
+	load_all_problem_types
 	
 end
 
@@ -87,7 +101,7 @@ end
 
 
 #TODO: add a 'ProblemTypeCustom' subclass, text box changes change type to problemtypecustom
-
+#TODO: load everything in a '/type' directory to autoload all subclass definitions
 
 
 
