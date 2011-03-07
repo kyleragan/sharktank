@@ -81,7 +81,8 @@ describe ProblemsController do
   describe "success" do
     
     before(:each) do
-      @attr = { :question => "1+1=?" }
+      @attr = { :question => "1+1=?", :answers_attributes => [{ :content => "2", 
+                                                                :correct => true }] } 
     end
     
     it "should create a problem" do

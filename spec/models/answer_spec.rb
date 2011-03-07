@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Answer do
   
   before(:each) do
-    @prob = Factory(:problem)
-    @attr = { :content => "some answer", :correct => true, :problem_id => 1 }
+    @prob = Factory(:problem) #1+1=2
+    @attr = { :content => "some answer", :correct => false, :problem_id => @prob }
   end
   
   describe "validations" do
@@ -27,27 +27,29 @@ describe Answer do
     
     it "should be unique on content/problem" do
       @prob.answers.create!(@attr)
-      dup_ans = @prob.answers.build(@attr.merge( :correct => false ))
+      dup_ans = @prob.answers.build(@attr)
       dup_ans.should_not be_valid
     end
     
     it "should not create duplicate answer content on the same problem" do
       @prob.answers.create(@attr)
       lambda do
-        @prob.answers.create(@attr.merge( :correct => false ))
+        @prob.answers.create(@attr)
       end.should_not change(Answer, :count)
     end
     
     it "should be unique on true/problem" do
       @prob.answers.create!(@attr)
-      dup_ans = @prob.answers.build(@attr.merge( :content => "a different answer" ))
+      dup_ans = @prob.answers.build(@attr.merge( :content => "a different answer", 
+                                                  :correct => true ))
       dup_ans.should_not be_valid
     end
     
     it "should not create another correct answer on the same problem" do
       @prob.answers.create(@attr)
       lambda do
-        @prob.answers.create(@attr.merge( :content => "a different answer" ))
+        @prob.answers.create(@attr.merge( :content => "a different answer", 
+                                                  :correct => true ))
       end.should_not change(Answer, :count)
     end
     
