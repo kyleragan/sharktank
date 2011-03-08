@@ -31,8 +31,8 @@ class ProblemsController < ApplicationController
       @probs = Problem.all
       if @newprob.save
         @probs << @newprob
-        flash.now[:success] = "Problem Created."
-		    render :action => :index
+        flash[:success] = "Problem Created."
+		    redirect_to problems_path
       else
         @title = "New Problem"
         render :new
