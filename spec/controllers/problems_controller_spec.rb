@@ -91,9 +91,9 @@ describe ProblemsController do
       end.should change(Problem, :count).by(1)
     end
     
-    it "should render the problem index" do
+    it "should redirect to the problem index" do
       post :create, :problem => @attr
-      response.should render_template('index')
+      response.should redirect_to(problems_path)
     end
     
     it "should have a success message" do
