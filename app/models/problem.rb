@@ -43,6 +43,12 @@ class Problem < ActiveRecord::Base
       end
   	end
   	
+  	def random
+  	  if (c = count) != 0
+  	    find(:first, :offset => rand(c))
+	    end
+  	end
+  	
 	end
 	
 	

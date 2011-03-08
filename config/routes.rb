@@ -3,6 +3,8 @@ Sharktank::Application.routes.draw do
 	
 	resources :problems, :only => [:index, :show, :create, :new, :destroy]
 	
+	resources :popquiz, :only => :index
+	
 	#resources :simple_alg_problems, :controller => :problems
 	
 
