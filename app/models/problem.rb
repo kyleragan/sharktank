@@ -63,7 +63,7 @@ class Problem < ActiveRecord::Base
 		self.question = "#{a}+#{b}=?"
 		self.type = "Problem"
 		self.answers.clear
-		self.answers.build(content: c.to_s, correct: true)
+		self.answers.build(:content => c.to_s, :correct => true)
 		return self
 	end
 	
