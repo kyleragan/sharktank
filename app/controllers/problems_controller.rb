@@ -13,30 +13,25 @@ class ProblemsController < ApplicationController
   end
 	
 	def new
-	  type = params[:generate]
-	  type ||= 'Problem'
-	  @newprob = Problem.factory(type,{})
-	  @newprob.generate
+	  type = params[:generate] || 'Problem'
+	  @newprob = Problem.factory(type,params[:problem]).generate
 	  @title = "New Problem"
 	end
 	
 	
 	def create
-	  if params[:generate]
+	  if type = params[:generate]
 	    #generate and reload :new
-	    type = params[:generate]
-	    @newprob = Problem.factory(type,params[:problem])
-	    @newprob.generate
+	    @newprob = Problem.factory(type,params[:problem]).generate
 	    @title = "New Problem"
 	    render :new and return
     else
       #attempt to save
-      type = params[:type]
       @newprob = Problem.factory(type,params[:problem])
       @probs = Problem.all
       if @newprob.save
         @probs << @newprob
-        flash[:success] = "Problem Created."
+        flash.now[:success] = "Problem Created."
 		    render :action => :index
       else
         @title = "New Problem"
@@ -58,7 +53,7 @@ end
 
 
 
-
+#TODO: think i need to move the generate code into 'new'
 
 
 #IMPROVE: can i change the text of my generate buttons?

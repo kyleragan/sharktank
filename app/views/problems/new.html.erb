@@ -10,6 +10,16 @@
     <%= p.text_field :question %>
   </div>
   <%= hidden_field_tag 'type', @newprob.problem_type %>
+  <%= p.fields_for :answers do |builder| %>
+    <div class="field">
+      <%= builder.label :content, "Answer" %><br />
+      <%= builder.text_field :content %>
+    </div>
+    <div class="checkbox">
+      <%= builder.label :correct, "True" %>
+      <%= builder.check_box :correct %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= p.submit "Save" %>
     <%= p.submit "Problem", :name => "generate" %>

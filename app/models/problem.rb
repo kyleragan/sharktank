@@ -1,17 +1,14 @@
 class Problem < ActiveRecord::Base
 	
-	attr_accessible :question
+	attr_accessible :question, :answers_attributes
 	
 	has_many :answers, :inverse_of => :problem, :dependent => :destroy
 	accepts_nested_attributes_for   :answers, :allow_destroy => true
-	attr_accessible :answers_attributes
   
 	
 	validates :question,	:presence => true,
 												:uniqueness => true 
   validate :at_least_one_answer
-	#validates_associated :answers
-	#TODO: validates_associated. first test if it's needed. create an invalid answer with a problem.
 	
 	def at_least_one_answer
 	  if self.answers.length < 1 || self.answers.all?{|ans| ans.marked_for_destruction?}
@@ -28,6 +25,7 @@ class Problem < ActiveRecord::Base
     def inherited(child) #make all children have model_name = 'Problem'
       Problem.types_of_problems << child
       child.instance_eval do
+        attr_accessible :answers_attributes
         def model_name
           Problem.model_name
         end
@@ -64,7 +62,8 @@ class Problem < ActiveRecord::Base
 		c = a+b
 		self.question = "#{a}+#{b}=?"
 		self.type = "Problem"
-		self.answers << Answer.new(content: c.to_s, correct: true)
+		self.answers.clear
+		self.answers.build(content: c.to_s, correct: true)
 		return self
 	end
 	

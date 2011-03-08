@@ -1,2 +1,6 @@
 <%= @prob.tex_question %><br>
 <br>
+<% @prob.answers.each do |a| %>
+  <%= a.content %>
+<% end %>
+
