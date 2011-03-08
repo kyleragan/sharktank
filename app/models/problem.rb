@@ -70,6 +70,12 @@ class Problem < ActiveRecord::Base
 		self.type = "Problem"
 		self.answers.clear
 		self.answers.build(:content => c.to_s, :correct => true)
+		3.times do
+      while (y = rand(40))==c
+      end
+      self.answers.build(:content => y.to_s, :correct => false)
+    end
+    
 		return self
 	end
 	

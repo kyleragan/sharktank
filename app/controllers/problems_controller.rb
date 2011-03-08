@@ -22,7 +22,7 @@ class ProblemsController < ApplicationController
 	def create
 	  if type = params[:generate]
 	    #generate and reload :new
-	    @newprob = Problem.factory(type,params[:problem]).generate
+	    @newprob = Problem.factory(type,{}).generate
 	    @title = "New Problem"
 	    render :new and return
     else
